@@ -240,7 +240,7 @@ void SevenSDisplay1_null(){
 	  HAL_GPIO_WritePin(dp1_GPIO_Port, dp1_Pin, GPIO_PIN_SET);
 }
 
-int TimePicker(int value){
+void TimePicker(int value){
 	switch(value){
 		case 1:
 			if(HAL_GPIO_ReadPin(button2_GPIO_Port, button2_Pin) == 1){
@@ -350,6 +350,8 @@ int main(void)
 
     if(HAL_GPIO_ReadPin(button1_GPIO_Port, button1_Pin) == GPIO_PIN_SET){
     	button1_flag +=1;
+    	TimePicker(button1_flag);
+        HAL_Delay(500);
     	if (button1_flag >= 5){
     		int setMinutes = (PickerMinutes1*10) + PickerMinutes2;
     		int setHours = (PickerHours1*10) + PickerHours2;
@@ -371,6 +373,7 @@ int main(void)
         process_alarm(AlarmState, RTC_AlarmTime.Hours);
         HAL_Delay(100);
     }
+
 
 
   }
